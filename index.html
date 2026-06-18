@@ -1,360 +1,1276 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trattoria Luce | 表参道のカジュアルイタリアン</title>
-  <meta name="description" content="東京・表参道のカジュアルイタリアンレストラン「Trattoria Luce」。北イタリア家庭料理と国産食材を組み合わせた本格パスタ・肉料理をランチ・ディナーでお楽しみいただけます。渋谷区神宮前、表参道駅より徒歩5分。" />
-  <meta name="robots" content="index, follow" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="https://spc-jp.github.io/mikke-keieikadai-shindan/favicon.png">
+  <link rel="apple-touch-icon" href="https://spc-jp.github.io/mikke-keieikadai-shindan/favicon.png">
+<title>みっけ診断 | 経営課題をAIと一緒に見つけよう</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  <!-- Open Graph -->
-  <meta property="og:type"        content="restaurant" />
-  <meta property="og:locale"      content="ja_JP" />
-  <meta property="og:site_name"   content="Trattoria Luce" />
-  <meta property="og:title"       content="Trattoria Luce | 表参道のカジュアルイタリアン" />
-  <meta property="og:description" content="東京・表参道のカジュアルイタリアンレストラン。本格パスタ・肉料理をランチ・ディナーでお楽しみいただけます。" />
-  <meta property="og:image"       content="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&q=80" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="Trattoria Luce | 表参道のカジュアルイタリアン" />
-  <meta name="twitter:description" content="東京・表参道のカジュアルイタリアンレストラン。本格パスタ・肉料理をランチ・ディナーでお楽しみいただけます。" />
-  <meta name="twitter:image"       content="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&q=80" />
-
-  <!-- JSON-LD 構造化データ -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Restaurant",
-    "name": "Trattoria Luce",
-    "description": "北イタリア家庭料理と国産食材を組み合わせた東京・表参道のカジュアルイタリアンレストラン",
-    "url": "https://trattoria-luce.example.com",
-    "telephone": "+81-3-1234-5678",
-    "servesCuisine": "Italian",
-    "priceRange": "¥¥",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "神宮前 X-XX-X ルーチェビル 1F",
-      "addressLocality": "渋谷区",
-      "addressRegion": "東京都",
-      "postalCode": "150-0001",
-      "addressCountry": "JP"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 35.6654,
-      "longitude": 139.7121
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-        "opens": "11:30",
-        "closes": "23:00"
-      }
-    ],
-    "image": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&q=80"
+  :root {
+    --blue: #2563eb;
+    --blue-dark: #1d4ed8;
+    --blue-light: #eff6ff;
+    --navy: #1e3a5f;
+    --cyan: #06b6d4;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --bg: #f8fafc;
   }
-  </script>
 
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+  body {
+    font-family: 'Hiragino Sans', 'Noto Sans JP', 'Yu Gothic', sans-serif;
+    font-size: 17px;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.75;
+  }
+
+  /* ── ヘッダー ── */
+  header {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+  .header-inner {
+    max-width: 900px; margin: 0 auto;
+    padding: 14px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { font-size: 22px; font-weight: 900; color: var(--blue); text-decoration: none; }
+  .logo span { font-size: 13px; color: var(--muted); margin-left: 6px; font-weight: 400; }
+  .btn-contact {
+    background: var(--blue); color: #fff;
+    padding: 10px 22px; border-radius: 12px;
+    font-weight: 700; font-size: 14px; border: none; cursor: pointer;
+    transition: background .2s;
+  }
+  .btn-contact:hover { background: var(--blue-dark); }
+
+  /* ── 画面制御 ── */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ── ヒーロー ── */
+  .hero {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 100%);
+    color: #fff; text-align: center;
+    padding: 64px 20px 72px;
+  }
+  .hero-sub { font-size: 17px; opacity: .9; margin-bottom: 14px; }
+  .hero h1 { font-size: clamp(26px, 5vw, 42px); font-weight: 900; line-height: 1.35; margin-bottom: 20px; }
+  .hero h1 em { color: #fde68a; font-style: normal; }
+  .hero p { font-size: 18px; opacity: .9; margin-bottom: 40px; }
+  .btn-hero {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #fbbf24; color: #1e293b;
+    font-size: 20px; font-weight: 900;
+    padding: 18px 40px; border-radius: 20px;
+    border: none; cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0,0,0,.2);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .btn-hero:hover { transform: scale(1.04); box-shadow: 0 12px 32px rgba(0,0,0,.25); }
+  .hero-note { margin-top: 14px; font-size: 13px; opacity: .7; }
+
+  /* ── セクション共通 ── */
+  .section { max-width: 900px; margin: 0 auto; padding: 56px 20px; }
+  .section-title { font-size: 26px; font-weight: 900; text-align: center; margin-bottom: 40px; color: var(--navy); }
+
+  /* ── 特徴カード ── */
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .feature-card {
+    background: #fff; border-radius: 20px; padding: 32px 24px;
+    text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  }
+  .feature-card .icon { font-size: 48px; margin-bottom: 14px; }
+  .feature-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 10px; color: var(--navy); }
+  .feature-card p { font-size: 15px; color: var(--muted); }
+
+  /* ── 流れ ── */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
+  .step {
+    background: #fff; border-radius: 16px; padding: 24px 16px;
+    text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,.05);
+  }
+  .step-num {
+    width: 36px; height: 36px; background: var(--blue); color: #fff;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 800; margin: 0 auto 12px;
+  }
+  .step .icon { font-size: 32px; margin-bottom: 8px; }
+  .step p { font-size: 14px; font-weight: 700; color: var(--text); }
+
+  /* ── CTA帯 ── */
+  .cta-band { background: var(--blue); color: #fff; text-align: center; padding: 56px 20px; }
+  .cta-band h2 { font-size: 24px; font-weight: 900; margin-bottom: 12px; }
+  .cta-band p { opacity: .9; margin-bottom: 30px; font-size: 17px; }
+
+  /* ── 診断ページ共通 ── */
+  .diag-wrap { max-width: 680px; margin: 0 auto; padding: 40px 20px 80px; }
+  .diag-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 14px; color: var(--muted); }
+  .progress-bar { background: #e2e8f0; border-radius: 9999px; height: 8px; margin-bottom: 32px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--blue); border-radius: 9999px; transition: width .4s ease; }
+
+  .diag-title { font-size: clamp(20px, 4vw, 28px); font-weight: 900; text-align: center; margin-bottom: 10px; color: var(--navy); }
+  .diag-sub { text-align: center; color: var(--muted); margin-bottom: 36px; font-size: 17px; }
+
+  /* ── 選択ボタン ── */
+  .choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .choice-grid.single { grid-template-columns: 1fr; }
+  .choice-btn {
+    display: flex; align-items: center; gap: 16px;
+    background: #fff; border: 2px solid var(--border);
+    border-radius: 18px; padding: 20px 22px;
+    font-size: 17px; font-weight: 700; color: var(--text);
+    cursor: pointer; text-align: left;
+    transition: border-color .2s, background .2s, transform .1s;
+  }
+  .choice-btn:hover { border-color: var(--blue); background: var(--blue-light); }
+  .choice-btn.selected { border-color: var(--blue); background: var(--blue-light); color: var(--blue-dark); }
+  .choice-btn.disabled { opacity: .35; cursor: not-allowed; pointer-events: none; background: #f8fafc; }
+  .choice-btn.available { border-color: var(--blue); background: var(--blue-light); position: relative; }
+  .choice-btn.available::after { content: '✅ 今すぐ診断できます'; position: absolute; top: -12px; left: 16px; background: var(--blue); color: #fff; font-size: 11px; font-weight: 800; padding: 2px 10px; border-radius: 99px; }
+  .choice-btn .btn-icon { font-size: 36px; flex-shrink: 0; }
+  .choice-btn .btn-text { flex: 1; }
+  .choice-btn .btn-name { display: block; }
+  .choice-btn .btn-desc { display: block; font-size: 13px; font-weight: 400; color: var(--muted); margin-top: 2px; }
+  .choice-btn .badge { font-size: 11px; background: #e2e8f0; color: var(--muted); padding: 2px 8px; border-radius: 99px; font-weight: 600; }
+
+  /* ── YES/NO ── */
+  .yn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .yn-btn {
+    background: #fff; border: 2px solid var(--border); border-radius: 18px;
+    padding: 28px 16px; text-align: center; cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .yn-btn:hover { border-color: var(--blue); background: var(--blue-light); }
+  .yn-btn.selected { border-color: var(--blue); background: var(--blue-light); }
+  .yn-btn .yn-icon { font-size: 40px; margin-bottom: 8px; }
+  .yn-btn .yn-label { font-size: 20px; font-weight: 800; }
+
+  /* ── SCALE ── */
+  .scale-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .scale-btn {
+    background: #fff; border: 2px solid var(--border); border-radius: 18px;
+    padding: 24px 12px; text-align: center; cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .scale-btn:hover { border-color: var(--blue); background: var(--blue-light); }
+  .scale-btn.selected { border-color: var(--blue); background: var(--blue-light); }
+  .scale-btn .sc-icon { font-size: 36px; margin-bottom: 8px; }
+  .scale-btn .sc-label { font-size: 14px; font-weight: 700; }
+
+  /* ── CHOICE ── */
+  .choice-list { display: flex; flex-direction: column; gap: 12px; }
+  .choice-item {
+    display: flex; align-items: center; gap: 14px;
+    background: #fff; border: 2px solid var(--border); border-radius: 16px;
+    padding: 18px 20px; cursor: pointer; font-size: 17px; font-weight: 600;
+    transition: border-color .2s, background .2s;
+  }
+  .choice-item:hover { border-color: var(--blue); background: var(--blue-light); }
+  .choice-item.selected { border-color: var(--blue); background: var(--blue-light); color: var(--blue-dark); }
+  .choice-radio {
+    width: 22px; height: 22px; border-radius: 50%;
+    border: 2px solid #cbd5e1; flex-shrink: 0; transition: all .2s;
+  }
+  .choice-item.selected .choice-radio { background: var(--blue); border-color: var(--blue); }
+
+  /* ── 質問カード ── */
+  .question-card {
+    background: #fff; border-radius: 24px;
+    padding: 36px 32px; margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  }
+  .question-text { font-size: 22px; font-weight: 800; margin-bottom: 32px; line-height: 1.5; color: var(--navy); }
+
+  /* ── ナビ ── */
+  .nav-btns { display: flex; gap: 14px; }
+  .btn-back {
+    flex: 1; background: #fff; border: 2px solid var(--border);
+    color: var(--text); font-size: 17px; font-weight: 700;
+    padding: 16px; border-radius: 16px; cursor: pointer; transition: background .2s;
+  }
+  .btn-back:hover { background: #f1f5f9; }
+  .btn-next {
+    flex: 2; background: var(--blue); color: #fff;
+    font-size: 17px; font-weight: 700;
+    padding: 16px; border-radius: 16px; cursor: pointer;
+    border: none; transition: background .2s;
+  }
+  .btn-next:hover:not(:disabled) { background: var(--blue-dark); }
+  .btn-next:disabled { opacity: .5; cursor: default; }
+  .hint { text-align: center; color: var(--muted); font-size: 14px; margin-top: 14px; }
+
+  /* ── ローディング ── */
+  #screen-loading { display: none; }
+  #screen-loading.active { display: flex; align-items: center; justify-content: center; min-height: 60vh; flex-direction: column; gap: 20px; }
+  .spinner { width: 56px; height: 56px; border: 5px solid #e2e8f0; border-top-color: var(--blue); border-radius: 50%; animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { font-size: 20px; font-weight: 700; color: var(--navy); }
+
+  /* ── 結果 ── */
+  .result-wrap { max-width: 720px; margin: 0 auto; padding: 40px 20px 80px; }
+  .result-badge { text-align: center; margin-bottom: 20px; }
+  .result-badge span { background: var(--blue-light); color: var(--blue); font-size: 14px; font-weight: 700; padding: 6px 18px; border-radius: 99px; }
+  .result-title { font-size: 22px; font-weight: 900; text-align: center; margin-bottom: 32px; color: var(--navy); }
+
+  .score-card { background: #fff; border-radius: 24px; padding: 36px; text-align: center; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,.07); }
+  .score-label { font-size: 15px; color: var(--muted); margin-bottom: 8px; }
+  .score-value { font-size: 80px; font-weight: 900; line-height: 1; margin-bottom: 10px; }
+  .score-value.good { color: var(--success); }
+  .score-value.mid  { color: var(--warning); }
+  .score-value.bad  { color: var(--danger); }
+  .score-status { display: inline-block; padding: 6px 20px; border-radius: 99px; font-size: 15px; font-weight: 800; }
+  .score-status.good { background: #d1fae5; color: #065f46; }
+  .score-status.mid  { background: #fef3c7; color: #92400e; }
+  .score-status.bad  { background: #fee2e2; color: #991b1b; }
+
+  .alert-card { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 18px; padding: 20px 24px; margin-bottom: 20px; display: flex; gap: 14px; }
+  .alert-card .al-icon { font-size: 24px; flex-shrink: 0; }
+  .alert-card .al-title { font-weight: 800; color: #c2410c; margin-bottom: 4px; }
+  .alert-card .al-body { color: #9a3412; font-size: 15px; }
+
+  .info-card { background: #fff; border-radius: 20px; padding: 28px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+  .info-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; color: var(--navy); }
+  .issue-list { list-style: none; }
+  .issue-item { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 16px; }
+  .issue-item:last-child { border: none; }
+  .issue-num { width: 28px; height: 28px; background: var(--blue); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; }
+
+  .action-item { border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; }
+  .action-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .action-name { font-weight: 800; font-size: 17px; }
+  .priority { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 99px; }
+  .priority.high { background: #fee2e2; color: #991b1b; }
+  .priority.mid  { background: #fef3c7; color: #92400e; }
+  .priority.low  { background: #d1fae5; color: #065f46; }
+  .action-desc { font-size: 15px; color: var(--muted); }
+
+  /* ── パッケージ ── */
+  .pkg-card {
+    background: #fff; border-radius: 22px; padding: 28px;
+    margin-bottom: 20px; border: 2px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+  }
+  .pkg-card.recommended { border-color: var(--blue); box-shadow: 0 6px 28px rgba(37,99,235,.18); }
+  .pkg-rec-badge { font-size: 12px; font-weight: 800; background: var(--blue); color: #fff; padding: 4px 14px; border-radius: 99px; display: inline-block; margin-bottom: 12px; }
+  .pkg-name { font-size: 20px; font-weight: 900; color: var(--blue); margin-bottom: 6px; }
+  .pkg-tagline { font-size: 15px; font-weight: 700; color: var(--navy); line-height: 1.6; margin-bottom: 12px; }
+  .pkg-result { font-size: 13px; font-weight: 700; color: #059669; background: #d1fae5; border-radius: 8px; padding: 8px 12px; margin-bottom: 16px; }
+  .pkg-features { list-style: none; margin-bottom: 16px; }
+  .pkg-features li { padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .pkg-features li:last-child { border-bottom: none; }
+  .pkg-feat-title { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+  .pkg-feat-note { font-size: 13px; color: var(--muted); line-height: 1.5; padding-left: 18px; }
+  .pkg-for { font-size: 13px; color: #6d28d9; background: #ede9fe; border-radius: 8px; padding: 8px 12px; margin-bottom: 16px; line-height: 1.6; }
+  .pkg-price-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+  .pkg-price { font-size: 20px; font-weight: 900; color: var(--blue); }
+  .pkg-trial { font-size: 13px; color: var(--success); font-weight: 700; background: #d1fae5; padding: 3px 10px; border-radius: 99px; }
+  .pkg-cta-btn {
+    width: 100%; padding: 16px; border-radius: 14px; border: none; cursor: pointer;
+    font-size: 16px; font-weight: 900; transition: transform .15s, box-shadow .15s;
+    background: linear-gradient(135deg, var(--blue), var(--cyan)); color: #fff;
+  }
+  .pkg-card:not(.recommended) .pkg-cta-btn { background: #f1f5f9; color: var(--navy); }
+  .pkg-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,.25); }
+
+  /* ── CTAカード ── */
+  .cta-card { background: linear-gradient(135deg, var(--blue), var(--cyan)); color: #fff; border-radius: 24px; padding: 40px 32px; text-align: center; margin-top: 32px; }
+  .cta-card h2 { font-size: 22px; font-weight: 900; margin-bottom: 10px; }
+  .cta-card p { opacity: .9; margin-bottom: 24px; font-size: 16px; }
+  .btn-consult {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #fbbf24; color: #1e293b;
+    font-size: 18px; font-weight: 900;
+    padding: 16px 36px; border-radius: 16px; border: none; cursor: pointer;
+    transition: transform .15s;
+  }
+  .btn-consult:hover { transform: scale(1.04); }
+  .cta-note { font-size: 13px; opacity: .75; margin-top: 12px; }
+  .retry-link { display: block; text-align: center; margin-top: 24px; color: var(--blue); font-weight: 700; cursor: pointer; font-size: 15px; }
+  .retry-link:hover { text-decoration: underline; }
+
+  /* ── 相談フォーム ── */
+  .form-wrap { max-width: 600px; margin: 0 auto; padding: 48px 20px 80px; }
+  .form-title { font-size: 28px; font-weight: 900; text-align: center; margin-bottom: 10px; color: var(--navy); }
+  .form-sub { text-align: center; color: var(--muted); margin-bottom: 36px; font-size: 16px; }
+  .form-card { background: #fff; border-radius: 24px; padding: 36px; box-shadow: 0 2px 12px rgba(0,0,0,.07); }
+  .form-group { margin-bottom: 22px; }
+  .form-label { display: block; font-weight: 700; margin-bottom: 8px; font-size: 16px; }
+  .form-label .required { color: var(--danger); margin-left: 4px; }
+  .form-input, .form-textarea {
+    width: 100%; border: 2px solid var(--border); border-radius: 14px;
+    padding: 14px 16px; font-size: 17px; font-family: inherit;
+    outline: none; transition: border-color .2s;
+    color: var(--text);
+  }
+  .form-input:focus, .form-textarea:focus { border-color: var(--blue); }
+  .form-textarea { resize: vertical; min-height: 100px; }
+  .btn-submit {
+    width: 100%; background: var(--blue); color: #fff;
+    font-size: 19px; font-weight: 900; padding: 18px;
+    border-radius: 16px; border: none; cursor: pointer;
+    transition: background .2s;
+  }
+  .btn-submit:hover { background: var(--blue-dark); }
+  .form-privacy { text-align: center; font-size: 13px; color: var(--muted); margin-top: 14px; }
+
+  /* ── サンクス ── */
+  .thanks-wrap { max-width: 560px; margin: 0 auto; padding: 80px 20px; text-align: center; }
+  .thanks-icon { font-size: 80px; margin-bottom: 24px; }
+  .thanks-title { font-size: 28px; font-weight: 900; margin-bottom: 16px; color: var(--navy); }
+  .thanks-body { font-size: 17px; color: var(--muted); margin-bottom: 36px; line-height: 1.8; }
+  .thanks-steps { background: #eff6ff; border-radius: 20px; padding: 28px; text-align: left; margin-bottom: 32px; }
+  .thanks-steps h3 { font-size: 17px; font-weight: 800; color: var(--blue); margin-bottom: 16px; }
+  .thanks-steps ol { padding-left: 22px; }
+  .thanks-steps li { margin-bottom: 10px; font-size: 16px; }
+  .btn-home {
+    background: var(--blue); color: #fff;
+    font-size: 17px; font-weight: 700; padding: 16px 40px;
+    border-radius: 16px; border: none; cursor: pointer; transition: background .2s;
+  }
+  .btn-home:hover { background: var(--blue-dark); }
+
+  /* ── フッター ── */
+  footer { background: #1e293b; color: #94a3b8; padding: 40px 20px; text-align: center; }
+  footer strong { color: #fff; display: block; font-size: 17px; margin-bottom: 6px; }
+  footer p { font-size: 14px; margin-bottom: 16px; }
+  footer .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 20px; }
+  footer .footer-links a { color: #94a3b8; text-decoration: none; font-size: 14px; cursor: pointer; }
+  footer .footer-links a:hover { color: #fff; }
+
+  @media (max-width: 500px) {
+    .choice-grid { grid-template-columns: 1fr; }
+    .yn-grid { grid-template-columns: 1fr 1fr; }
+    .scale-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- ========== HEADER / NAV ========== -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="#hero" class="logo">Trattoria Luce</a>
-      <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <nav class="site-nav" aria-label="メインナビゲーション">
-        <ul>
-          <li><a href="#concept">Concept</a></li>
-          <li><a href="#menu">Menu</a></li>
-          <li><a href="#info">Access</a></li>
-          <li><a href="#reserve" class="nav-cta">Reserve</a></li>
-        </ul>
-      </nav>
+<header>
+  <div class="header-inner">
+    <a class="logo" href="#" onclick="showScreen('top')">みっけ<span>経営課題診断</span></a>
+    <button class="btn-contact" onclick="showScreen('contact')">無料相談</button>
+  </div>
+</header>
+
+<!-- ========== TOP ========== -->
+<div id="screen-top" class="screen active">
+  <div class="hero">
+    <p class="hero-sub">中小企業の経営課題を、AIと一緒に見つけませんか？</p>
+    <h1>あなたの会社に合った<br><em>解決策</em>を、3分で提案</h1>
+    <p>業種を選んで簡単な質問に答えるだけ。<br>AIが課題を分析し、最適なパッケージをご提案します。</p>
+    <button class="btn-hero" onclick="showScreen('industry')">
+      🔍 無料で診断をはじめる
+    </button>
+    <p class="hero-note">登録不要・完全無料・3分で完了</p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">みっけ診断が選ばれる3つの理由</h2>
+    <div class="features">
+      <div class="feature-card"><div class="icon">🎯</div><h3>3分で診断完了</h3><p>簡単な質問に答えるだけ。難しい専門知識は不要です。</p></div>
+      <div class="feature-card"><div class="icon">🤖</div><h3>AIが課題を分析</h3><p>回答をAIがリアルタイム分析。客観的なスコアで現状を把握。</p></div>
+      <div class="feature-card"><div class="icon">📋</div><h3>具体的な解決策を提案</h3><p>あなたの業種・悩みに合わせた最適なパッケージを提案します。</p></div>
     </div>
-  </header>
+  </div>
 
-  <!-- ========== HERO ========== -->
-  <section id="hero" class="hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Casual Italian — Tokyo</p>
-      <h1 class="hero-title">Light up your<br>everyday table.</h1>
-      <p class="hero-sub">日常に、ちょっとだけ特別なひとときを。</p>
-      <a href="#reserve" class="btn btn-primary">ご予約はこちら</a>
-    </div>
-    <div class="hero-scroll-hint" aria-hidden="true">scroll</div>
-  </section>
-
-  <!-- ========== CONCEPT ========== -->
-  <section id="concept" class="section concept">
-    <div class="container concept-grid">
-      <div class="concept-image">
-        <img
-          class="img-placeholder"
-          src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=960&q=80"
-          alt="Trattoria Luce の店内インテリア"
-          loading="lazy"
-        />
-      </div>
-      <div class="concept-body">
-        <p class="section-label">Our Concept</p>
-        <h2 class="section-title">気取らない、<br>でも本物の味。</h2>
-        <p class="concept-text">
-          Trattoria Luce は、イタリア語で「光」を意味する名のとおり、日常に小さな輝きを灯すレストランです。
-          北イタリア・ピエモンテ州の家庭料理をベースに、国産食材を組み合わせた、飾らないけれど本質的な料理をお届けします。
-        </p>
-        <p class="concept-text">
-          ドレスコードなし、気軽な一人飯も、大切な人との記念日も—— 誰もが「ただいま」と言えるような空間を目指しています。
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== MENU ========== -->
-  <section id="menu" class="section menu">
-    <div class="container">
-      <p class="section-label center">Our Menu</p>
-      <h2 class="section-title center">旬の食材と、<br>シンプルな技法。</h2>
-
-      <div class="menu-tabs" role="tablist">
-        <button class="tab-btn active" role="tab" data-target="tab-antipasto">Antipasto</button>
-        <button class="tab-btn" role="tab" data-target="tab-pasta">Pasta</button>
-        <button class="tab-btn" role="tab" data-target="tab-main">Main</button>
-        <button class="tab-btn" role="tab" data-target="tab-dolce">Dolce</button>
-      </div>
-
-      <!-- Antipasto -->
-      <div id="tab-antipasto" class="menu-panel active">
-        <ul class="menu-list">
-          <li class="menu-item">
-            <div class="menu-item-info">
-              <span class="menu-name">前菜の盛り合わせ</span>
-              <span class="menu-desc">本日の旬野菜と生ハムの盛り合わせ、バーニャカウダソース添え</span>
-            </div>
-            <span class="menu-price">¥1,480</span>
-          </li>
-          <li class="menu-item">
-            <div class="menu-item-info">
-              <span class="menu-name">ブルスケッタ 3種</span>
-              <span class="menu-desc">トマト / きのこ / リコッタ&ハチミツ</span>
-            </div>
-            <span class="menu-price">¥980</span>
-          </li>
-          <li class="menu-item">
-            <div class="menu-item-info">
-              <span class="menu-name">カプレーゼ</span>
-              <span class="menu-desc">北海道産モッツァレラ、フレッシュトマト、バジルオイル</span>
-            </div>
-            <span class="menu-price">¥1,280</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Pasta -->
-      <div id="tab-pasta" class="menu-panel">
-        <ul class="menu-list">
-          <li class="menu-item">
-            <div class="menu-item-info">
-              <span class="menu-name">カルボナーラ</span>
-              <span class="menu-desc">グアンチャーレ、卵黄、ペコリーノロマーノ — クリームなしの本格レシピ</span>
-            </div>
-            <span class="menu-price">¥1,680</span>
-          </li>
-          <li class="menu-item">
-            <div class="menu-item-info">
-              <span class="menu-name">ラグーのタリアテッレ</span>
-              <span class="menu-desc">和牛とポルチーニの長時間煮込みソース</span>
-            </div>
-            <span class="menu-price">¥1,980</span>
-          </li>
-          <li class="menu-item">
-            <div class="menu-item-info">
-              <span class="menu-name">ヴォンゴレビアンコ</span>
-              <span class="menu-desc">三陸産あさり、白ワイン、唐辛子</span>
-            </div>
-            <span class="menu-price">¥1,780</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Main -->
-      <div id="tab-main" class="menu-panel">
-        <ul class="menu-list">
-          <li class="menu-item">
-            <div class="menu-item-info">
-              <span class="menu-name">鶏もものディアボラ風</span>
-              <span class="menu-desc">スパイシートマトソース、ローズマリー風味</span>
-            </div>
-            <span class="menu-price">¥2,200</span>
-          </li>
-          <li class="menu-item">
-            <div class="menu-item-info">
-              <span class="menu-name">真鯛のアクアパッツァ</span>
-              <span class="menu-desc">長崎産真鯛、あさり、フルーツトマト</span>
-            </div>
-            <span class="menu-price">¥2,680</span>
-          </li>
-          <li class="menu-item">
-            <div class="menu-item-info">
-              <span class="menu-name">イベリコ豚のグリル</span>
-              <span class="menu-desc">サルサヴェルデ、季節野菜のロースト添え</span>
-            </div>
-            <span class="menu-price">¥2,980</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Dolce -->
-      <div id="tab-dolce" class="menu-panel">
-        <ul class="menu-list">
-          <li class="menu-item">
-            <div class="menu-item-info">
-              <span class="menu-name">ティラミス</span>
-              <span class="menu-desc">マスカルポーネとエスプレッソの定番デザート</span>
-            </div>
-            <span class="menu-price">¥780</span>
-          </li>
-          <li class="menu-item">
-            <div class="menu-item-info">
-              <span class="menu-name">パンナコッタ</span>
-              <span class="menu-desc">旬のフルーツソース、ピスタチオ</span>
-            </div>
-            <span class="menu-price">¥680</span>
-          </li>
-          <li class="menu-item">
-            <div class="menu-item-info">
-              <span class="menu-name">アフォガート</span>
-              <span class="menu-desc">バニラジェラート、エスプレッソ</span>
-            </div>
-            <span class="menu-price">¥580</span>
-          </li>
-        </ul>
-      </div>
-
-      <p class="menu-note">※ 表示価格はすべて税込です。メニューは仕入れにより変更になる場合があります。</p>
-    </div>
-  </section>
-
-  <!-- ========== STORE INFO ========== -->
-  <section id="info" class="section info">
-    <div class="container info-grid">
-      <div class="info-body">
-        <p class="section-label">Access & Info</p>
-        <h2 class="section-title">店舗情報</h2>
-        <address>
-        <dl class="info-table">
-          <dt>住所</dt>
-          <dd>〒150-0001<br>東京都渋谷区神宮前 X-XX-X<br>ルーチェビル 1F</dd>
-
-          <dt>電話</dt>
-          <dd><a href="tel:0312345678">03-1234-5678</a></dd>
-
-          <dt>営業時間</dt>
-          <dd>
-            ランチ 11:30 – 14:30（L.O. 14:00）<br>
-            ディナー 18:00 – 23:00（L.O. 22:30）
-          </dd>
-
-          <dt>定休日</dt>
-          <dd>月曜日（祝日の場合は翌火曜）</dd>
-
-          <dt>アクセス</dt>
-          <dd>東京メトロ「表参道駅」A2出口より徒歩5分</dd>
-
-          <dt>席数</dt>
-          <dd>38席（テラス8席含む）</dd>
-        </dl>
-        </address>
-      </div>
-      <div class="info-map">
-        <img
-          class="map-placeholder"
-          src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&q=80"
-          alt="店舗周辺の地図イメージ"
-          loading="lazy"
-        />
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== RESERVATION ========== -->
-  <section id="reserve" class="section reserve">
-    <div class="container reserve-inner">
-      <p class="section-label center">Reservation</p>
-      <h2 class="section-title center">ご予約</h2>
-      <p class="reserve-text">
-        お電話またはオンラインフォームにてご予約を承っております。<br>
-        4名様以上の団体予約、ご記念日のご相談もお気軽にどうぞ。
-      </p>
-      <div class="reserve-actions">
-        <button class="btn btn-outline js-phone-modal">電話で予約<span class="btn-sub">03-1234-5678</span></button>
-        <button class="btn btn-primary js-online-modal">オンライン予約</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== FOOTER ========== -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <span class="footer-logo">Trattoria Luce</span>
-      <p class="footer-copy">&copy; 2026 Trattoria Luce. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <!-- ========== MODAL ========== -->
-  <div id="reserve-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-phone" hidden>
-    <div class="modal-backdrop"></div>
-    <div class="modal-box">
-      <button class="modal-x" aria-label="閉じる">&times;</button>
-
-      <!-- 電話パネル -->
-      <div class="modal-panel" data-panel="phone">
-        <div class="modal-icon phone-icon" aria-hidden="true">📞</div>
-        <h3 id="modal-title-phone" class="modal-title">お電話でご予約</h3>
-        <p class="modal-text">下記番号へお気軽にお電話ください。<br>受付時間中にオペレーターがご対応します。</p>
-        <a href="tel:0312345678" class="modal-tel">03-1234-5678</a>
-        <p class="modal-hours">受付：11:00 – 22:00（月曜定休）</p>
-        <button class="btn btn-primary modal-close" style="margin-top:1.5rem;">閉じる</button>
-      </div>
-
-      <!-- オンライン Step1：カレンダー -->
-      <div class="modal-panel" data-panel="calendar" hidden>
-        <h3 id="modal-title-calendar" class="modal-title">日付を選択</h3>
-        <div class="cal-header">
-          <button class="cal-nav" id="cal-prev" aria-label="前の月">&#8249;</button>
-          <span class="cal-month" id="cal-month-label"></span>
-          <button class="cal-nav" id="cal-next" aria-label="次の月">&#8250;</button>
-        </div>
-        <div class="cal-grid" id="cal-grid"></div>
-      </div>
-
-      <!-- オンライン Step2：時間 -->
-      <div class="modal-panel" data-panel="time" hidden>
-        <button class="modal-back js-back-to-calendar">&#8592; 日付を変更</button>
-        <h3 class="modal-title" id="modal-title-time"></h3>
-        <p class="modal-text">ご希望の時間帯を選んでください。</p>
-        <div class="time-grid" id="time-grid"></div>
-      </div>
-
-      <!-- オンライン Step3：完了 -->
-      <div class="modal-panel" data-panel="complete" hidden>
-        <div class="modal-icon" aria-hidden="true">✓</div>
-        <h3 class="modal-title" id="modal-title-complete">予約が完了しました</h3>
-        <p class="modal-text" id="modal-complete-text"></p>
-        <button class="btn btn-primary modal-close">閉じる</button>
+  <div style="background:#f1f5f9; padding: 56px 20px;">
+    <div class="section" style="padding:0">
+      <h2 class="section-title">診断の流れ</h2>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="icon">🏢</div><p>業種を選ぶ</p></div>
+        <div class="step"><div class="step-num">2</div><div class="icon">💭</div><p>悩みを選ぶ</p></div>
+        <div class="step"><div class="step-num">3</div><div class="icon">✍️</div><p>質問に答える</p></div>
+        <div class="step"><div class="step-num">4</div><div class="icon">📊</div><p>結果を受け取る</p></div>
       </div>
     </div>
   </div>
 
-  <script src="main.js"></script>
+  <div class="cta-band">
+    <h2>今すぐ無料で診断してみませんか？</h2>
+    <p>3分で課題が見える化されます。登録不要・完全無料です。</p>
+    <button class="btn-hero" onclick="showScreen('industry')">🔍 無料診断をはじめる</button>
+  </div>
+
+  <footer>
+    <strong>みっけ診断プラットフォーム</strong>
+    <p>中小企業の経営課題を、AIと一緒に見つけませんか？</p>
+    <div class="footer-links">
+      <a onclick="showScreen('contact')">お問い合わせ</a>
+      <a href="#">プライバシーポリシー</a>
+    </div>
+    <p>© 2024 みっけ診断プラットフォーム</p>
+  </footer>
+</div>
+
+<!-- ========== 業種選択 ========== -->
+<div id="screen-industry" class="screen">
+  <div class="diag-wrap">
+    <div class="diag-header">
+      <span id="progress-label-industry">STEP 1 / 4</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
+    <h2 class="diag-title">業種を教えてください</h2>
+    <p class="diag-sub">あなたの会社・お店の業種を選んでください</p>
+    <div class="choice-grid">
+      <button class="choice-btn" onclick="selectIndustry('manufacturing','製造業')">
+        <span class="btn-icon">🏭</span>
+        <span class="btn-text"><span class="btn-name">製造業</span><span class="btn-desc">工場・メーカー・加工業</span></span>
+      </button>
+      <button class="choice-btn" onclick="selectIndustry('construction','建設・リフォーム')">
+        <span class="btn-icon">🔨</span>
+        <span class="btn-text"><span class="btn-name">建設・リフォーム</span><span class="btn-desc">建設・工務店・リフォーム</span></span>
+      </button>
+      <button class="choice-btn" onclick="selectIndustry('realestate','不動産仲介・販売')">
+        <span class="btn-icon">🏠</span>
+        <span class="btn-text"><span class="btn-name">不動産仲介・販売</span><span class="btn-desc">不動産・住宅販売・賃貸</span></span>
+      </button>
+      <button class="choice-btn" onclick="selectIndustry('consulting','コンサル・士業')">
+        <span class="btn-icon">📋</span>
+        <span class="btn-text"><span class="btn-name">コンサル・士業</span><span class="btn-desc">税理士・社労士・コンサルティング</span></span>
+      </button>
+      <button class="choice-btn" onclick="selectIndustry('medical','医療・ヘルスケア')">
+        <span class="btn-icon">🏥</span>
+        <span class="btn-text"><span class="btn-name">医療・ヘルスケア</span><span class="btn-desc">クリニック・整骨院・介護</span></span>
+      </button>
+      <button class="choice-btn" onclick="selectIndustry('other','その他')">
+        <span class="btn-icon">🏢</span>
+        <span class="btn-text"><span class="btn-name">その他</span><span class="btn-desc">上記以外の業種</span></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 悩み選択 ========== -->
+<div id="screen-concern" class="screen">
+  <div class="diag-wrap">
+    <div class="diag-header">
+      <span>STEP 2 / 4　<span id="concern-industry-label" style="color:var(--blue);font-weight:700"></span></span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
+    <h2 class="diag-title">どんなことでお悩みですか？</h2>
+    <p class="diag-sub">最も当てはまるものを1つ選んでください</p>
+    <div class="choice-grid single">
+      <button class="choice-btn" onclick="selectConcern('hiring')">
+        <span class="btn-icon">👥</span>
+        <span class="btn-text"><span class="btn-name">採用を強化したい</span><span class="btn-desc">人材確保・採用コスト削減</span></span>
+      </button>
+      <button class="choice-btn" onclick="selectConcern('sales')">
+        <span class="btn-icon">📈</span>
+        <span class="btn-text"><span class="btn-name">売上を伸ばしたい</span><span class="btn-desc">新規顧客獲得・売上アップ</span></span>
+      </button>
+      <button class="choice-btn" onclick="selectConcern('efficiency')">
+        <span class="btn-icon">⚡</span>
+        <span class="btn-text"><span class="btn-name">業務を効率化したい</span><span class="btn-desc">時間削減・コスト削減</span></span>
+      </button>
+      <button class="choice-btn" onclick="selectConcern('ai')">
+        <span class="btn-icon">🤖</span>
+        <span class="btn-text"><span class="btn-name">AIを導入したい</span><span class="btn-desc">AI活用・自動化</span></span>
+      </button>
+      <button class="choice-btn" onclick="selectConcern('repeat')">
+        <span class="btn-icon">🔄</span>
+        <span class="btn-text"><span class="btn-name">リピート率を上げたい</span><span class="btn-desc">顧客維持・LTV向上</span></span>
+      </button>
+      <button class="choice-btn" onclick="selectConcern('subsidy')">
+        <span class="btn-icon">💰</span>
+        <span class="btn-text"><span class="btn-name">補助金を活用したい</span><span class="btn-desc">補助金・助成金申請</span></span>
+      </button>
+    </div>
+    <div style="margin-top:28px">
+      <button class="btn-back" onclick="showScreen('industry')">← 戻る</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 質問 ========== -->
+<div id="screen-questions" class="screen">
+  <div class="diag-wrap">
+    <div class="diag-header">
+      <span id="q-context"></span>
+      <span id="q-counter"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="q-progress" style="width:0%"></div></div>
+    <div class="question-card">
+      <p class="question-text" id="q-text"></p>
+      <div id="q-answers"></div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-back" onclick="prevQuestion()">← 戻る</button>
+      <button class="btn-next" id="btn-next" disabled onclick="nextQuestion()">次へ →</button>
+    </div>
+    <p class="hint" id="q-hint">回答を選んでから次へ進んでください</p>
+  </div>
+</div>
+
+<!-- ========== AI分析中 ========== -->
+<div id="screen-loading" class="screen">
+  <div style="position:relative;width:100%;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#050d1a;">
+    <canvas id="matrix-canvas" style="position:absolute;inset:0;width:100%;height:100%"></canvas>
+    <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;padding:32px;">
+      <div id="matrix-logo" style="font-size:52px;font-weight:900;color:#fff;font-family:monospace;letter-spacing:4px;text-shadow:0 0 30px rgba(124,77,255,0.9),0 0 60px rgba(124,77,255,0.5);">みっけ</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.7);font-family:monospace;letter-spacing:4px;">AI ANALYZING</div>
+      <div id="matrix-msg" style="font-size:16px;color:rgba(255,255,255,0.85);font-family:monospace;min-height:24px;letter-spacing:1px;"></div>
+      <div style="display:flex;gap:8px;margin-top:4px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#7c4dff;animation:mdot 1.2s infinite 0s ease-in-out both;display:inline-block"></span>
+        <span style="width:8px;height:8px;border-radius:50%;background:#7c4dff;animation:mdot 1.2s infinite 0.2s ease-in-out both;display:inline-block"></span>
+        <span style="width:8px;height:8px;border-radius:50%;background:#7c4dff;animation:mdot 1.2s infinite 0.4s ease-in-out both;display:inline-block"></span>
+      </div>
+    </div>
+  </div>
+  <style>
+    @keyframes mdot{0%,80%,100%{transform:scale(0.5);opacity:0.3}40%{transform:scale(1.3);opacity:1}}
+  </style>
+</div>
+
+<!-- ========== 結果 ========== -->
+<div id="screen-result" class="screen">
+  <div class="result-wrap">
+    <div class="result-badge"><span>🤖 AI診断完了</span></div>
+    <h1 class="result-title" id="result-title"></h1>
+
+    <div class="score-card">
+      <p class="score-label">総合スコア</p>
+      <div class="score-value" id="score-value"></div>
+      <div class="score-status" id="score-status"></div>
+    </div>
+
+    <div class="alert-card" id="loss-card">
+      <div class="al-icon">⚠️</div>
+      <div><div class="al-title">想定される機会損失</div><div class="al-body" id="loss-text"></div></div>
+    </div>
+
+    <div class="info-card">
+      <h3>🎯 優先して取り組むべき課題</h3>
+      <ul class="issue-list" id="issues-list"></ul>
+    </div>
+
+    <div class="info-card">
+      <h3>📋 具体的な改善アクション</h3>
+      <div id="actions-list"></div>
+    </div>
+
+    <h2 style="text-align:center;font-size:22px;font-weight:900;margin:36px 0 20px;color:var(--navy)">🎁 あなたにおすすめのパッケージ</h2>
+    <div id="packages-list"></div>
+
+    <div class="cta-card">
+      <h2>まずは無料でご相談ください</h2>
+      <p>診断結果をもとに、専門スタッフが最適な解決策をご提案します</p>
+      <button class="btn-consult" onclick="showScreen('contact')">📞 無料相談を予約する</button>
+      <p class="cta-note">返答まで2営業日以内 | 完全無料 | しつこい営業なし</p>
+    </div>
+
+    <p class="retry-link" onclick="restart()">別の悩みで診断しなおす →</p>
+  </div>
+</div>
+
+<!-- ========== 相談フォーム ========== -->
+<div id="screen-contact" class="screen">
+  <div class="form-wrap">
+    <h1 class="form-title">無料相談を予約する</h1>
+    <p class="form-sub">診断結果をもとに、専門スタッフがご相談に対応します。<br>返答まで2営業日以内・完全無料です。</p>
+    <div class="form-card">
+      <form onsubmit="submitForm(event)">
+        <div class="form-group">
+          <label class="form-label">お名前<span class="required">*</span></label>
+          <input class="form-input" type="text" id="f-name" placeholder="山田 太郎" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">メールアドレス<span class="required">*</span></label>
+          <input class="form-input" type="email" id="f-email" placeholder="taro@example.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">会社名</label>
+          <input class="form-input" type="text" id="f-company" placeholder="株式会社みっけ">
+        </div>
+        <div class="form-group">
+          <label class="form-label">電話番号</label>
+          <input class="form-input" type="tel" id="f-phone" placeholder="090-0000-0000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">ご希望の日時（任意）</label>
+          <input class="form-input" type="text" id="f-date" placeholder="例：平日14時以降">
+        </div>
+        <div class="form-group">
+          <label class="form-label">メッセージ（任意）</label>
+          <textarea class="form-textarea" id="f-message" placeholder="ご質問・ご要望があればご記入ください"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">📨 相談を予約する（無料）</button>
+        <p class="form-privacy">ご入力いただいた情報は、相談対応のためのみに使用します。</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ========== サンクス ========== -->
+<div id="screen-thanks" class="screen">
+  <div class="thanks-wrap">
+    <div class="thanks-icon">✅</div>
+    <h1 class="thanks-title">お申込みありがとうございます！</h1>
+    <p class="thanks-body">担当スタッフより<strong>2営業日以内</strong>にご連絡いたします。<br>自動返信メールをご確認ください。</p>
+    <div class="thanks-steps">
+      <h3>🎁 ご相談までの流れ</h3>
+      <ol>
+        <li>担当者からご連絡（2営業日以内）</li>
+        <li>オンラインまたはお電話で30分ヒアリング</li>
+        <li>診断結果をもとにご提案書をご提出</li>
+      </ol>
+    </div>
+    <button class="btn-home" onclick="restart()">トップページへ戻る</button>
+  </div>
+</div>
+
+<script>
+// ── カテゴリ別データ ──────────────────────────────
+const CONCERN_DATA = {
+  hiring: {
+    name: '採用を強化したい',
+    lossUnit: '採用コスト超過・機会損失',
+    lossMultiplier: 5.2,
+    questions: [
+      { text: '採用専用のホームページ（採用サイト）はありますか？', type: 'YES_NO', weight: 2.0 },
+      { text: '求人情報をSNS（Instagram・X・Facebook）で発信していますか？', type: 'YES_NO', weight: 1.5 },
+      { text: '応募者がLINEやスマホから簡単に応募できる仕組みがありますか？', type: 'YES_NO', weight: 2.0 },
+      { text: '社員のインタビューや職場の様子を公開していますか？', type: 'YES_NO', weight: 1.5 },
+      { text: '採用活動の結果に満足していますか？', type: 'SCALE', weight: 2.0 },
+      { text: '求人媒体（Indeed・求人ボックス等）への出稿頻度はどのくらいですか？', type: 'CHOICE', weight: 1.5, options: ['ほぼ毎月出稿している', '数ヶ月に1回程度', 'ほとんど出稿していない'] },
+      { text: '応募者への返信・連絡はどのくらいの速さで行っていますか？', type: 'SCALE', weight: 1.0 },
+      { text: '自社の強み・魅力を採用目線で言語化できていますか？', type: 'SCALE', weight: 1.5 },
+    ],
+    issues: [
+      '採用情報の発信力が弱く、求職者に届いていない',
+      '応募導線が整備されておらず、応募のハードルが高い',
+      '採用ブランディングが確立されていない',
+      '求人媒体への露出が不足している',
+      '応募者への対応スピードが改善余地あり',
+    ],
+    actions: [
+      { title: '採用サイトの構築', desc: '自社の魅力を伝える採用専用ページを作成し、応募数を増やします。', p: 'high' },
+      { title: 'LINE応募導線の設計', desc: 'スマホから簡単に応募できるLINE導線を設置し、応募率を向上させます。', p: 'high' },
+      { title: '社員インタビュー動画の制作', desc: '実際の社員の声を動画で発信し、求職者の安心感を高めます。', p: 'mid' },
+      { title: '求人媒体への定期出稿', desc: 'Indeed・求人ボックスへ定期的に出稿し、応募母数を増やします。', p: 'mid' },
+    ],
+    packages: [
+      {
+        name: '採用みっけ スタンダード',
+        tagline: '採用コストを半分以下に。応募数を3倍にする完全パッケージ',
+        result: '平均 応募数3.1倍・採用コスト54%削減',
+        features: [
+          { title: '採用サイト制作', note: '求職者が「ここで働きたい」と感じるデザインに。スマホ最適化済み' },
+          { title: '社員インタビュー動画（3本）', note: 'リアルな職場の声が安心感を生む。動画あり求人は応募率2.4倍' },
+          { title: 'LINE応募導線設計', note: '履歴書不要でまず気軽に応募。離脱率を大幅に減らします' },
+          { title: '採用SNS運用サポート（3ヶ月）', note: 'Instagramで「この会社いいな」と思わせる投稿戦略を伴走支援' },
+        ],
+        for: '今すぐ採用を本気で変えたい方・複数名採用予定の方',
+        price: '月額 49,800円〜',
+        trial: '初月 無料トライアルあり',
+        recommended: true,
+      },
+      {
+        name: '採用みっけ ライト',
+        tagline: 'まず「応募が来る仕組み」だけを整える。最短2週間でスタート',
+        result: '導入企業の87%が1ヶ月以内に応募を獲得',
+        features: [
+          { title: '採用LP（ランディングページ）制作', note: '求人票だけでは伝わらない魅力を1ページに凝縮' },
+          { title: 'LINE応募導線設計', note: '24時間どこからでも応募可能。機会を逃しません' },
+          { title: '求人原稿作成サポート', note: 'プロのライターが「刺さる言葉」に書き直し。掲載媒体にも流用可' },
+        ],
+        for: 'とりあえず試したい方・採用予算を抑えたい方',
+        price: '月額 29,800円〜',
+        trial: '相談・見積り 完全無料',
+        recommended: false,
+      },
+    ],
+  },
+  sales: {
+    name: '売上を伸ばしたい',
+    lossUnit: '売上機会損失',
+    lossMultiplier: 8.5,
+    questions: [
+      { text: '自社のホームページやSNSから定期的に新規問い合わせが来ていますか？', type: 'YES_NO', weight: 2.0 },
+      { text: 'Googleビジネスプロフィール（旧Googleマイビジネス）を活用していますか？', type: 'YES_NO', weight: 1.5 },
+      { text: '新規集客のために広告（Web・チラシ等）を出稿していますか？', type: 'YES_NO', weight: 1.5 },
+      { text: '現在の売上に占める新規顧客の割合に満足していますか？', type: 'SCALE', weight: 2.0 },
+      { text: '自社の強みや差別化ポイントを明確に言語化できていますか？', type: 'SCALE', weight: 2.0 },
+      { text: '新規集客の主な手段はどれですか？', type: 'CHOICE', weight: 1.5, options: ['Web（HP・SNS・広告）が中心', '紹介・口コミが中心', '特に施策していない'] },
+      { text: '商談・見積り後の成約率に満足していますか？', type: 'SCALE', weight: 1.5 },
+      { text: '顧客ターゲット（誰に売るか）を明確に定義していますか？', type: 'YES_NO', weight: 1.0 },
+    ],
+    issues: [
+      'Web集客の仕組みが整っておらず新規流入が少ない',
+      '自社の強みが伝わっておらず競合との差別化ができていない',
+      '集客チャネルが口コミ・紹介に依存しリスクが高い',
+      'ターゲット顧客が曖昧でマーケティングが非効率',
+      '商談後の成約率改善の余地がある',
+    ],
+    actions: [
+      { title: 'Webサイトのリニューアル・SEO対策', desc: '検索からの流入を増やし、問い合わせ獲得の仕組みを整えます。', p: 'high' },
+      { title: 'Googleビジネスプロフィールの最適化', desc: '無料でできる地域集客の最重要施策。写真・口コミ・投稿を整備します。', p: 'high' },
+      { title: 'ターゲット設定とペルソナ設計', desc: '誰に売るかを明確にし、全施策の効果を高めます。', p: 'mid' },
+      { title: 'SNSアカウント運用', desc: 'Instagram・Xで定期的に情報発信し、ブランド認知を高めます。', p: 'mid' },
+    ],
+    packages: [
+      {
+        name: '売上みっけ スタンダード',
+        tagline: 'Webから毎月安定して問い合わせが来る仕組みを丸ごと構築',
+        result: '平均 問い合わせ数2.7倍・新規売上 月+38万円',
+        features: [
+          { title: 'Webサイトリニューアル', note: '「なんとなく古い」を払拭。検索上位表示とCV率アップを同時に実現' },
+          { title: 'SEO対策・コンテンツ制作', note: 'お客様が検索するキーワードで上位表示。広告費ゼロで集客し続けます' },
+          { title: 'Google広告運用（3ヶ月）', note: '予算を最小限に抑えながら、今すぐ客だけを狙い打ちで集客' },
+          { title: 'SNS運用サポート', note: 'フォロワーを「ファン」に変えて、紹介・口コミを自動で生み出す設計' },
+        ],
+        for: '月の問い合わせをもっと増やしたい方・広告に頼りすぎている方',
+        price: '月額 59,800円〜',
+        trial: '初月 無料トライアルあり',
+        recommended: true,
+      },
+      {
+        name: '売上みっけ ライト',
+        tagline: 'まずGoogleマップ集客だけで月10件以上の新規問い合わせを目指す',
+        result: '導入後2ヶ月で問い合わせ数が平均1.9倍に',
+        features: [
+          { title: 'Googleビジネスプロフィール最適化', note: '無料でできる最強の地域集客ツール。掲載内容を徹底的に磨き上げます' },
+          { title: 'ランディングページ制作', note: '「ここに頼みたい」と思わせる1ページを最速2週間で納品' },
+          { title: 'SNSアカウント設計', note: 'バズらなくていい。地域のお客様に確実に届く運用方針を設計' },
+        ],
+        for: '低予算から始めたい方・まず地域集客を固めたい方',
+        price: '月額 34,800円〜',
+        trial: '相談・見積り 完全無料',
+        recommended: false,
+      },
+    ],
+  },
+  efficiency: {
+    name: '業務を効率化したい',
+    lossUnit: '残業・非効率業務による損失',
+    lossMultiplier: 6.8,
+    questions: [
+      { text: '日常業務の中でExcelやスプレッドシートを多用していますか？', type: 'YES_NO', weight: 1.0 },
+      { text: '手作業・紙での業務が多く、デジタル化が進んでいないと感じますか？', type: 'YES_NO', weight: 2.0 },
+      { text: '業務マニュアルや手順書が整備されていますか？', type: 'YES_NO', weight: 1.5 },
+      { text: '現在の業務効率・生産性に満足していますか？', type: 'SCALE', weight: 2.0 },
+      { text: '社内のコミュニケーション（情報共有・連絡）はスムーズですか？', type: 'SCALE', weight: 1.5 },
+      { text: '最も時間を取られている業務はどれですか？', type: 'CHOICE', weight: 2.0, options: ['事務・データ入力・書類作成', '顧客対応・問い合わせ', '会議・社内調整'] },
+      { text: 'クラウドツール（Google Workspace・kintone等）を活用していますか？', type: 'YES_NO', weight: 1.5 },
+      { text: '残業・長時間労働が常態化していますか？', type: 'SCALE', weight: 1.5 },
+    ],
+    issues: [
+      '紙・手作業業務が多くデジタル化が遅れている',
+      '業務マニュアルがなく、属人化が進んでいる',
+      'クラウドツール活用が不十分で情報共有に手間がかかる',
+      '特定業務に時間が集中し、コアワークが圧迫されている',
+      '長時間労働が常態化しており離職リスクが高い',
+    ],
+    actions: [
+      { title: '業務フローの可視化・棚卸し', desc: '現状の業務を整理し、削減・自動化できるポイントを特定します。', p: 'high' },
+      { title: 'クラウドツール導入支援', desc: 'kintone・Google Workspace等の導入で情報共有と作業効率を改善します。', p: 'high' },
+      { title: '業務マニュアルの整備', desc: 'マニュアル化で引き継ぎ時間を削減し、品質の均一化を図ります。', p: 'mid' },
+      { title: 'RPA・自動化ツールの導入', desc: 'データ入力・定型業務を自動化し、月間XX時間の削減を実現します。', p: 'mid' },
+    ],
+    packages: [
+      {
+        name: '効率化みっけ スタンダード',
+        tagline: '月40時間の残業を削減。社員が「やりたい仕事」に集中できる職場へ',
+        result: '平均 月間残業42時間削減・コスト年間210万円圧縮',
+        features: [
+          { title: '業務フロー分析・改善提案', note: '「なんとなくやっている」作業を可視化。無駄を数字で洗い出します' },
+          { title: 'クラウドツール導入・設定', note: 'kintone・Google Workspace等を現場に合わせてゼロから設定。使いやすさを優先' },
+          { title: '自動化ツール（RPA）導入', note: 'コピペ・転記・集計を自動化。毎日1時間の手作業がなくなります' },
+          { title: '社員向けトレーニング', note: '「使えない」で終わらせない。現場定着まで伴走します' },
+        ],
+        for: '残業が常態化している方・紙・Excel業務が多い方',
+        price: '月額 49,800円〜',
+        trial: '初月 無料トライアルあり',
+        recommended: true,
+      },
+      {
+        name: '効率化みっけ ライト',
+        tagline: 'まず1部門だけ。小さく始めて確実に成果を出す効率化入門',
+        result: '導入企業の91%が「思ったより簡単だった」と回答',
+        features: [
+          { title: '業務フロー分析（1部門）', note: '対象部門の現状を丸裸に。改善ロードマップをお渡しします' },
+          { title: 'クラウドツール導入サポート', note: '難しい設定はすべてお任せ。翌日からすぐ使える状態で引き渡し' },
+          { title: 'マニュアル作成支援', note: '属人化を解消。誰でも同じ品質で仕事ができる仕組みを作ります' },
+        ],
+        for: 'まず小さく試したい方・ITが苦手なスタッフが多い方',
+        price: '月額 29,800円〜',
+        trial: '相談・見積り 完全無料',
+        recommended: false,
+      },
+    ],
+  },
+  ai: {
+    name: 'AIを導入したい',
+    lossUnit: 'AI未活用による競合比較劣位・損失',
+    lossMultiplier: 7.3,
+    questions: [
+      { text: '社員がChatGPTや生成AIツールを業務で使ったことがありますか？', type: 'YES_NO', weight: 1.5 },
+      { text: 'AI導入によって解決したい具体的な課題が明確ですか？', type: 'YES_NO', weight: 2.0 },
+      { text: '社内にITやデジタルツールに詳しい担当者はいますか？', type: 'YES_NO', weight: 1.5 },
+      { text: 'AIを導入する予算感は把握できていますか？', type: 'YES_NO', weight: 1.0 },
+      { text: 'データ活用（顧客データ・売上データ等）の現状に満足していますか？', type: 'SCALE', weight: 2.0 },
+      { text: 'AI活用で最も期待することはどれですか？', type: 'CHOICE', weight: 2.0, options: ['業務自動化・時間削減', '顧客対応・チャットボット', '分析・意思決定支援'] },
+      { text: '競合他社のデジタル化・AI活用が気になっていますか？', type: 'SCALE', weight: 1.0 },
+      { text: 'AI導入後の運用・管理体制を考えられていますか？', type: 'YES_NO', weight: 1.5 },
+    ],
+    issues: [
+      'AI導入の目的・ゴールが曖昧で何から始めるか分からない',
+      '社内のITリテラシーが低くAI活用が進まない',
+      'データが整備されておらずAI活用の土台がない',
+      '導入予算・ROIの試算ができていない',
+      '運用体制が未整備で導入後の継続が不安',
+    ],
+    actions: [
+      { title: 'AI活用ロードマップの策定', desc: '自社の課題に合ったAI導入の優先順位と手順を整理します。', p: 'high' },
+      { title: 'ChatGPT・生成AI活用研修', desc: '社員が実務で使えるレベルまで引き上げる実践的トレーニングです。', p: 'high' },
+      { title: 'AIチャットボットの導入', desc: '顧客問い合わせの一次対応を自動化し、対応工数を削減します。', p: 'mid' },
+      { title: 'データ整備・ダッシュボード構築', desc: '経営判断に使えるデータ活用基盤を整えます。', p: 'mid' },
+    ],
+    packages: [
+      {
+        name: 'AI導入みっけ スタンダード',
+        tagline: '社員全員がAIを使いこなす会社へ。競合に2年先んじる環境を今すぐ構築',
+        result: '平均 業務時間23%削減・社員満足度19ポイント向上',
+        features: [
+          { title: 'AI活用ロードマップ策定', note: '「何から始めるか」を明確に。御社の課題に合った優先順位で進めます' },
+          { title: '生成AI社員研修（全社）', note: '「使ったことない」から「毎日使う」へ。実務直結の研修で定着率90%超' },
+          { title: 'AIチャットボット導入', note: '問い合わせ対応の70%を自動化。夜中でも土日でも顧客対応が可能に' },
+          { title: 'データ活用基盤の構築', note: '勘と経験から数字の経営へ。売上・在庫・顧客データを一元管理' },
+        ],
+        for: '競合に差をつけたい方・社員のAIリテラシーを底上げしたい方',
+        price: '月額 64,800円〜',
+        trial: '初月 無料トライアルあり',
+        recommended: true,
+      },
+      {
+        name: 'AI導入みっけ ライト',
+        tagline: '半日のワークショップで「AIって使えそう」を全員に体験させる',
+        result: '参加者の94%が「すぐ業務に使える」と回答',
+        features: [
+          { title: 'AI活用ワークショップ（半日）', note: 'パソコンが苦手な方でも大丈夫。実際に手を動かして体験する実践型' },
+          { title: 'ChatGPT業務活用テンプレート提供', note: '議事録・メール文案・報告書など30種類のすぐ使えるテンプレートをプレゼント' },
+          { title: '個別相談（月2回）', note: '「これもAIでできる？」という疑問をその場で解決。伴走型でサポート' },
+        ],
+        for: 'AIに興味はあるけど何から始めるか分からない方',
+        price: '月額 24,800円〜',
+        trial: '相談・見積り 完全無料',
+        recommended: false,
+      },
+    ],
+  },
+  repeat: {
+    name: 'リピート率を上げたい',
+    lossUnit: '既存顧客離脱による損失',
+    lossMultiplier: 9.1,
+    questions: [
+      { text: '顧客の連絡先（LINE・メール・電話）を管理するリストがありますか？', type: 'YES_NO', weight: 2.0 },
+      { text: '既存顧客へのフォロー連絡（お礼・お知らせ等）を定期的に行っていますか？', type: 'YES_NO', weight: 2.0 },
+      { text: 'ポイントカード・会員制度・サブスクなどのリピート促進策がありますか？', type: 'YES_NO', weight: 1.5 },
+      { text: '現在のリピート率・顧客継続率に満足していますか？', type: 'SCALE', weight: 2.0 },
+      { text: '顧客からのレビュー・口コミを積極的に集めていますか？', type: 'YES_NO', weight: 1.0 },
+      { text: 'リピート客獲得のために最も力を入れていることは何ですか？', type: 'CHOICE', weight: 1.5, options: ['接客・サービス品質の向上', 'LINE・メルマガでの情報発信', '特に施策していない'] },
+      { text: '顧客一人ひとりに合わせたパーソナライズ対応ができていますか？', type: 'SCALE', weight: 1.5 },
+      { text: '来店・購入サイクルを把握し、最適なタイミングで連絡できていますか？', type: 'YES_NO', weight: 1.5 },
+    ],
+    issues: [
+      '顧客リストが整備されておらず再アプローチができない',
+      '既存顧客へのフォロー施策がなく自然離脱が多い',
+      'リピート促進の仕組み（会員制・ポイント等）がない',
+      '顧客一人ひとりへのパーソナライズが不十分',
+      'リピートサイクルを把握できておらずタイミングが遅い',
+    ],
+    actions: [
+      { title: 'LINE公式アカウントの構築・運用', desc: '顧客リストを構築し、最適なタイミングで情報を届けます。', p: 'high' },
+      { title: '顧客管理（CRM）の導入', desc: '顧客情報を一元管理し、来店サイクルに合わせたフォローを自動化します。', p: 'high' },
+      { title: '会員制度・ポイント制度の設計', desc: 'リピートのインセンティブを作り、来店頻度を高めます。', p: 'mid' },
+      { title: 'Google口コミ収集の仕組み化', desc: '良い口コミを増やし、新規集客とリピート双方に貢献します。', p: 'mid' },
+    ],
+    packages: [
+      {
+        name: 'リピートみっけ スタンダード',
+        tagline: '一度来たお客様が必ず戻ってくる。リピート率を2倍にする仕組みを丸ごと構築',
+        result: '平均 リピート率2.3倍・客単価18%アップ',
+        features: [
+          { title: 'LINE公式アカウント構築・運用', note: '友だち登録したお客様に最適なタイミングでクーポン・お知らせを自動配信' },
+          { title: 'CRM（顧客管理）導入', note: '「前回何を買ったか」「いつ来たか」を一目で把握。勘に頼らない顧客対応へ' },
+          { title: '会員制度・ポイント設計', note: '「次も来ないともったいない」と思わせる仕掛けを設計。離脱を防ぎます' },
+          { title: 'リピート分析レポート（月次）', note: '数字で改善サイクルを回す。何が効いて何が効いていないかを毎月報告' },
+        ],
+        for: 'リピーターを増やして安定収益を作りたい方・新規集客コストを減らしたい方',
+        price: '月額 44,800円〜',
+        trial: '初月 無料トライアルあり',
+        recommended: true,
+      },
+      {
+        name: 'リピートみっけ ライト',
+        tagline: 'LINEだけで始める。低コストで今すぐリピーターを増やす最短ルート',
+        result: '導入後3ヶ月でリピート来店数が平均1.6倍に',
+        features: [
+          { title: 'LINE公式アカウント構築', note: '設定から友だち集め施策まで全部お任せ。最短1週間でスタート可能' },
+          { title: 'メッセージ配信テンプレート提供', note: '「何を送ればいい？」に悩まない。季節・シーン別30パターンをプレゼント' },
+          { title: '初月運用サポート', note: '最初の1ヶ月は一緒に運用。自走できるまで丁寧にサポートします' },
+        ],
+        for: 'まずLINEだけ試したい方・月2万円台でリピート施策を始めたい方',
+        price: '月額 24,800円〜',
+        trial: '相談・見積り 完全無料',
+        recommended: false,
+      },
+    ],
+  },
+  subsidy: {
+    name: '補助金を活用したい',
+    lossUnit: '未申請による補助金の機会損失',
+    lossMultiplier: 12.0,
+    questions: [
+      { text: '過去に補助金・助成金を申請・受給したことがありますか？', type: 'YES_NO', weight: 1.0 },
+      { text: '現在、設備投資・システム導入・人材育成などの計画がありますか？', type: 'YES_NO', weight: 2.0 },
+      { text: '補助金申請に必要な事業計画書を自社で作成できる体制がありますか？', type: 'YES_NO', weight: 1.5 },
+      { text: '活用できる補助金・助成金の種類を把握していますか？', type: 'SCALE', weight: 2.0 },
+      { text: '直近1〜2年で実施したい投資の規模はどのくらいですか？', type: 'CHOICE', weight: 2.0, options: ['500万円以上', '100〜500万円未満', '100万円未満'] },
+      { text: '税理士・中小企業診断士などの専門家と連携できていますか？', type: 'YES_NO', weight: 1.5 },
+      { text: '補助金申請に向けた社内の書類・財務データは整備されていますか？', type: 'SCALE', weight: 1.5 },
+      { text: '公募スケジュール（締め切り）を事前に把握して動けていますか？', type: 'YES_NO', weight: 1.5 },
+    ],
+    issues: [
+      '活用できる補助金の種類・要件を把握できていない',
+      '事業計画書の作成スキル・リソースが社内にない',
+      '公募スケジュールを見逃し申請機会を失っている',
+      '専門家（士業）との連携ができておらず申請に不安がある',
+      '財務データ・書類が整備されておらず申請準備に時間がかかる',
+    ],
+    actions: [
+      { title: '活用可能な補助金の調査・選定', desc: '業種・投資計画に合わせて申請すべき補助金を特定します。', p: 'high' },
+      { title: '事業計画書の作成支援', desc: '採択率を高める事業計画書を専門家と一緒に作成します。', p: 'high' },
+      { title: '補助金申請スケジュール管理', desc: '公募情報を定期的にモニタリングし、申請機会を逃しません。', p: 'mid' },
+      { title: '財務書類・社内資料の整備', desc: '申請に必要な書類を事前に整えておくことで、即座に対応できます。', p: 'mid' },
+    ],
+    packages: [
+      {
+        name: '補助金みっけ スタンダード',
+        tagline: '採択されなければ費用ゼロ。平均300万円以上を国から引き出す完全伴走プラン',
+        result: '採択率82%・平均受給額 312万円',
+        features: [
+          { title: '補助金調査・選定', note: '50種類以上の補助金から御社に最適なものを厳選。申請チャンスを逃しません' },
+          { title: '事業計画書作成支援', note: '採択率を左右する最重要書類。プロが一緒に作るから通る計画書に仕上がります' },
+          { title: '申請書類の作成サポート', note: '複雑な書類手続きはすべてお任せ。経営者の時間を取らせません' },
+          { title: '採択後の実績報告支援', note: '採択がゴールではない。補助金を確実に受け取るまで完全サポート' },
+        ],
+        for: '設備投資・IT導入・人材育成など具体的な計画がある方',
+        price: '成功報酬型（採択金額の10%〜）',
+        trial: '初回相談・補助金診断 完全無料',
+        recommended: true,
+      },
+      {
+        name: '補助金みっけ ライト',
+        tagline: 'まず「うちは何に使えるの？」を無料で確認。0円から始める補助金活用',
+        result: '相談者の78%が「知らなかった補助金が見つかった」と回答',
+        features: [
+          { title: '補助金診断（1回）', note: '業種・規模・投資計画をヒアリングして使える補助金を洗い出します' },
+          { title: '申請可能な補助金リスト提供', note: '金額・採択率・難易度を整理した一覧表をお渡し。優先順位が一目でわかる' },
+          { title: '専門家への橋渡し', note: '必要に応じて中小企業診断士・行政書士とスムーズに連携' },
+        ],
+        for: '補助金に興味はあるけど何から始めるか分からない方',
+        price: '初回相談 完全無料',
+        trial: '費用は採択後のみ発生',
+        recommended: false,
+      },
+    ],
+  },
+};
+
+// ── 状態 ────────────────────────────────────────
+let state = {
+  industry: '', industryName: '',
+  concern: '', concernName: '',
+  currentQ: 0,
+  answers: [],
+};
+
+// ── 画面切替 ─────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── 業種選択 ─────────────────────────────────────
+function selectIndustry(slug, name) {
+  state.industry = slug;
+  state.industryName = name;
+  document.getElementById('concern-industry-label').textContent = name;
+  showScreen('concern');
+}
+
+// ── 悩み選択 ─────────────────────────────────────
+function selectConcern(slug) {
+  const data = CONCERN_DATA[slug];
+  state.concern = slug;
+  state.concernName = data.name;
+  state.currentQ = 0;
+  state.answers = new Array(data.questions.length).fill(null);
+  renderQuestion();
+  showScreen('questions');
+}
+
+// ── 質問レンダリング ──────────────────────────────
+function renderQuestion() {
+  const questions = CONCERN_DATA[state.concern].questions;
+  const q = questions[state.currentQ];
+  const total = questions.length;
+  const idx = state.currentQ;
+
+  document.getElementById('q-context').textContent = state.industryName + ' / ' + state.concernName;
+  document.getElementById('q-counter').textContent = (idx + 1) + ' / ' + total;
+  document.getElementById('q-progress').style.width = (((idx + 1) / total) * 100) + '%';
+  document.getElementById('q-text').textContent = q.text;
+
+  const ans = document.getElementById('q-answers');
+  ans.innerHTML = '';
+
+  if (q.type === 'YES_NO') {
+    ans.innerHTML = `
+      <div class="yn-grid">
+        <button class="yn-btn ${state.answers[idx] === 'yes' ? 'selected' : ''}" onclick="setAnswer('yes')">
+          <div class="yn-icon">✅</div><div class="yn-label">はい</div>
+        </button>
+        <button class="yn-btn ${state.answers[idx] === 'no' ? 'selected' : ''}" onclick="setAnswer('no')">
+          <div class="yn-icon">❌</div><div class="yn-label">いいえ</div>
+        </button>
+      </div>`;
+  } else if (q.type === 'SCALE') {
+    ans.innerHTML = `
+      <div class="scale-grid">
+        <button class="scale-btn ${state.answers[idx] === '3' ? 'selected' : ''}" onclick="setAnswer('3')">
+          <div class="sc-icon">😊</div><div class="sc-label">できている</div>
+        </button>
+        <button class="scale-btn ${state.answers[idx] === '2' ? 'selected' : ''}" onclick="setAnswer('2')">
+          <div class="sc-icon">😐</div><div class="sc-label">まあまあ</div>
+        </button>
+        <button class="scale-btn ${state.answers[idx] === '1' ? 'selected' : ''}" onclick="setAnswer('1')">
+          <div class="sc-icon">😟</div><div class="sc-label">できていない</div>
+        </button>
+      </div>`;
+  } else if (q.type === 'CHOICE') {
+    const items = q.options.map((opt, i) =>
+      `<div class="choice-item ${state.answers[idx] === String(i) ? 'selected' : ''}" onclick="setAnswer('${i}')">
+        <div class="choice-radio"></div>
+        <span>${opt}</span>
+      </div>`
+    ).join('');
+    ans.innerHTML = `<div class="choice-list">${items}</div>`;
+  }
+
+  updateNextBtn();
+}
+
+function setAnswer(value) {
+  state.answers[state.currentQ] = value;
+  renderQuestion();
+}
+
+function updateNextBtn() {
+  const questions = CONCERN_DATA[state.concern].questions;
+  const btn = document.getElementById('btn-next');
+  const hasAnswer = state.answers[state.currentQ] !== null;
+  btn.disabled = !hasAnswer;
+  btn.textContent = (state.currentQ === questions.length - 1) ? '診断結果を見る →' : '次へ →';
+  document.getElementById('q-hint').style.visibility = hasAnswer ? 'hidden' : 'visible';
+}
+
+function nextQuestion() {
+  const questions = CONCERN_DATA[state.concern].questions;
+  if (state.answers[state.currentQ] === null) return;
+  if (state.currentQ < questions.length - 1) {
+    state.currentQ++;
+    renderQuestion();
+  } else {
+    showScreen('loading');
+    setTimeout(startMatrix, 50);
+    setTimeout(calcResult, 2800);
+  }
+}
+
+function prevQuestion() {
+  if (state.currentQ > 0) {
+    state.currentQ--;
+    renderQuestion();
+  } else {
+    showScreen('concern');
+  }
+}
+
+// ── スコア計算 ────────────────────────────────────
+function calcResult() {
+  const data = CONCERN_DATA[state.concern];
+  const questions = data.questions;
+  let totalWeight = 0, earned = 0;
+
+  questions.forEach((q, i) => {
+    const w = q.weight;
+    totalWeight += w;
+    const v = state.answers[i];
+    if (q.type === 'YES_NO') {
+      earned += v === 'yes' ? w : 0;
+    } else if (q.type === 'SCALE') {
+      earned += (Number(v) / 3) * w;
+    } else if (q.type === 'CHOICE') {
+      const idx = Number(v);
+      const ratio = idx === 0 ? 1 : idx === 1 ? 0.5 : 0.1;
+      earned += ratio * w;
+    }
+  });
+
+  const score = Math.round((earned / totalWeight) * 100);
+  renderResult(score);
+  showScreen('result');
+}
+
+// ── 結果レンダリング ──────────────────────────────
+function renderResult(score) {
+  const data = CONCERN_DATA[state.concern];
+
+  document.getElementById('result-title').textContent =
+    state.industryName + ' / ' + data.name + ' の診断結果';
+
+  const sv = document.getElementById('score-value');
+  const ss = document.getElementById('score-status');
+  sv.textContent = score + '点';
+  if (score >= 70) {
+    sv.className = 'score-value good';
+    ss.textContent = '良好'; ss.className = 'score-status good';
+  } else if (score >= 40) {
+    sv.className = 'score-value mid';
+    ss.textContent = '要改善'; ss.className = 'score-status mid';
+  } else {
+    sv.className = 'score-value bad';
+    ss.textContent = '要対策'; ss.className = 'score-status bad';
+  }
+
+  const loss = Math.round((100 - score) * data.lossMultiplier);
+  document.getElementById('loss-text').textContent =
+    `現状では、年間約${loss}万円の${data.lossUnit}が想定されます。`;
+
+  const issueCount = score >= 70 ? 2 : score >= 40 ? 3 : data.issues.length;
+  document.getElementById('issues-list').innerHTML = data.issues.slice(0, issueCount).map((t, i) =>
+    `<li class="issue-item"><div class="issue-num">${i+1}</div><span>${t}</span></li>`
+  ).join('');
+
+  document.getElementById('actions-list').innerHTML = data.actions.map(a => `
+    <div class="action-item">
+      <div class="action-header">
+        <span class="action-name">${a.title}</span>
+        <span class="priority ${a.p}">${a.p === 'high' ? '優先度：高' : a.p === 'mid' ? '優先度：中' : '優先度：低'}</span>
+      </div>
+      <p class="action-desc">${a.desc}</p>
+    </div>`).join('');
+
+  document.getElementById('packages-list').innerHTML = data.packages.map(pkg => `
+    <div class="pkg-card ${pkg.recommended ? 'recommended' : ''}">
+      ${pkg.recommended ? '<div class="pkg-rec-badge">⭐ 最もおすすめ</div>' : '<div style="height:8px"></div>'}
+      <div class="pkg-name">${pkg.name}</div>
+      <div class="pkg-tagline">${pkg.tagline}</div>
+      <div class="pkg-result">📊 ${pkg.result}</div>
+      <ul class="pkg-features">
+        ${pkg.features.map(f => `
+          <li>
+            <div class="pkg-feat-title">✓ ${f.title}</div>
+            <div class="pkg-feat-note">${f.note}</div>
+          </li>`).join('')}
+      </ul>
+      <div class="pkg-for">👤 <strong>こんな方に：</strong>${pkg.for}</div>
+      <div class="pkg-price-row">
+        <div class="pkg-price">${pkg.price}</div>
+        <div class="pkg-trial">${pkg.trial}</div>
+      </div>
+      <button class="pkg-cta-btn" onclick="showScreen('contact')">
+        ${pkg.recommended ? '今すぐ無料相談する →' : '詳しく話を聞く →'}
+      </button>
+    </div>`).join('');
+}
+
+// ── フォーム送信 ──────────────────────────────────
+function submitForm(e) {
+  e.preventDefault();
+  showScreen('thanks');
+}
+
+// ── マトリックスアニメーション ────────────────────
+let matrixRAF = null;
+
+function startMatrix() {
+  const canvas = document.getElementById('matrix-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const resize = () => {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  };
+  resize();
+
+  const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEF';
+  const fontSize = 14;
+  let cols = Math.floor(canvas.width / fontSize);
+  let drops = Array(cols).fill(0).map(() => Math.floor(Math.random() * canvas.height / fontSize));
+
+  const msgs = ['回答データを解析中...', '課題パターンを検出中...', 'スコアを計算中...', '最適な解決策を選定中...', '診断レポートを生成中...'];
+  let msgIdx = 0;
+  const msgEl = document.getElementById('matrix-msg');
+  const msgTimer = setInterval(() => {
+    if (!document.getElementById('screen-loading').classList.contains('active')) {
+      clearInterval(msgTimer);
+      return;
+    }
+    msgIdx = (msgIdx + 1) % msgs.length;
+    if (msgEl) msgEl.textContent = msgs[msgIdx];
+  }, 600);
+  if (msgEl) msgEl.textContent = msgs[0];
+
+  function draw() {
+    cols = Math.floor(canvas.width / fontSize);
+    if (drops.length !== cols) drops = Array(cols).fill(0).map(() => Math.floor(Math.random() * canvas.height / fontSize));
+
+    ctx.fillStyle = 'rgba(5, 13, 26, 0.07)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    drops.forEach((y, i) => {
+      const ch = chars[Math.floor(Math.random() * chars.length)];
+      const isBright = Math.random() > 0.93;
+      ctx.font = `${fontSize}px monospace`;
+      ctx.fillStyle = isBright ? '#ffffff' : (Math.random() > 0.5 ? '#7c4dff' : '#4a90d9');
+      ctx.fillText(ch, i * fontSize, y * fontSize);
+      if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+      else drops[i]++;
+    });
+
+    matrixRAF = requestAnimationFrame(draw);
+  }
+
+  if (matrixRAF) cancelAnimationFrame(matrixRAF);
+  draw();
+}
+
+function stopMatrix() {
+  if (matrixRAF) { cancelAnimationFrame(matrixRAF); matrixRAF = null; }
+}
+
+// ── リスタート ────────────────────────────────────
+function restart() {
+  stopMatrix();
+  state = { industry: '', industryName: '', concern: '', concernName: '', currentQ: 0, answers: [] };
+  showScreen('top');
+}
+</script>
 </body>
 </html>
